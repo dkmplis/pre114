@@ -1,6 +1,6 @@
 package jm.task.core.jdbc.util;
+
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -9,7 +9,7 @@ public class Util {
     private static final String USER = "root";
     private static final String PASSWORD = "root";
 
-    public Util() {
+    private Util() {
 
     }
 
@@ -17,12 +17,18 @@ public class Util {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-
+            connection.setAutoCommit(false);
         } catch (SQLException e) {
-            System.out.println("Нет подключения к БД!!!");
+            throw new RuntimeException();
         }
         return connection;
     }
 
-    // реализуйте настройку соеденения с БД
+    public static void closeConnection(Connection connection) {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
