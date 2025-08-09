@@ -110,8 +110,4 @@ public class UserDaoJDBCImpl implements UserDao {
 
 
     }
-    @Override
-    public Connection getConnection() {
-        return conn;
-    }
 }
