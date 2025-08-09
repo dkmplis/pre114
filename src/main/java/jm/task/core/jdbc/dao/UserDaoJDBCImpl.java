@@ -105,11 +105,6 @@ public class UserDaoJDBCImpl implements UserDao {
             st.executeUpdate(sql);
             conn.commit();
         } catch (SQLException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                throw new RuntimeException();
-            }
             throw new RuntimeException();
         }
 
